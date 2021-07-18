@@ -4,20 +4,22 @@
         <div class="price">{{ price }}</div>
         <hr>
         <input type="text" :value="count" @change="onInput">
-        <button class="btn btn-warning" @click="decrease">-1</button>
-        <button class="btn btn-success" @click="increase">+1</button>
+        <button class="btn btn-warning" @click="Decrease">-1</button>
+        <button class="btn btn-success" @click="Increase">+1</button>
     </div>
 </template>
 
 <script>
-    import { mapGetters, mapMutations } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
-        computed: mapGetters(['price', 'count']),
+        computed: {
+            ...mapGetters(['price', 'count'])
+        },
         methods: {
-            ...mapMutations(['increase', 'decrease', 'setCount']),
+            ...mapActions(['Increase', 'Decrease', 'SetCount', 'SendOrder']),
             onInput(e) {
-                this.setCount(e.target.value);
+                this.SetCount(e.target.value);
             }
         }
     };

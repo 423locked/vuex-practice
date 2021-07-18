@@ -15,22 +15,42 @@ export default createStore({
         }
     },
     mutations: {
-        increase(state) {
-            state.count++;
-        },
-        decrease(state) {
-            if (state.count > 0)
-                state.count--;
-        },
         setCount(state, value) {
-            state.count = parseInt(value);
+            if (value === '+1')
+                state.count++;
+
+            else if (value === '-1'){
+                if (state.count > 1) state.count--;
+            }
+
+            else {
+                let parsed = parseInt(value);
+                if (isNaN(parsed) || parsed < 1)
+                    state.count = 1;
+                else {
+                    if (!(/^[0-9]+$/.test(value))) 
+                        value = value.replace(/[a-z]/gi, '');
+ 
+                    state.count = parseInt(value);
+                }
+                    
+            }
         },
         setStatus(state, value) {
             state.status = value;
         }
     },
     actions: {
-        sendOrder(store) {
+        Increase(store) {
+            store.commit('setCount', '+1');
+        },
+        Decrease(store) {
+            store.commit('setCount', '-1');
+        },
+        SetCount(store, value) {
+            store.commit('setCount', value);
+        },
+        SendOrder(store) {
             store.commit('setStatus', 'pending');
             
             setTimeout(() => {

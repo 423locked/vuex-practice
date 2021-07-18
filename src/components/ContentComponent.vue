@@ -7,7 +7,7 @@
 				</div>
 			</div>
 			<hr>
-			<button class="btn btn-primary" type="button" @click="sendOrder">Submit Order</button>
+			<button class="btn btn-primary" type="button" @click="SendOrder">Submit Order</button>
 			<hr>
 			<div v-if="showAlert" class="alert" :class="alertClasses">
 				{{ alertText }}
@@ -40,7 +40,7 @@
 			}
 		},
 		methods: {
-			...mapActions(['sendOrder'])
+			...mapActions(['SendOrder'])
 		}
 	};
 </script>
